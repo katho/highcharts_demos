@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>grafica_3</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Catarino" />
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<%= javascript_include_tag "jquery.min", "highcharts", "exporting" %>
+		<script type="text/javascript">
+		var aleatorios = new Array(500);
+		var i = 0;
+		var fecha = new Date();
+		
+$(function () {
+		for(i = 0; i < aleatorios.length; i++)
+			{
+				aleatorios[i] = Math.floor((Math.random()*100)+1);
+			}
+        $('#contenedor_graficos').highcharts({
+            chart: {
+                zoomType: 'x',
+                spacingRight: 20
+            },
+            title: {
+                text: 'Números aleatorios'
+            },
+            subtitle: {
+                text: document.ontouchstart === undefined ?
+                    'Haga click y arrastre para hacer zoom' :
+                    'Arrastre su dedo en el gráfico para hacer zoom'
+            },
+            xAxis: {
+                type: 'datetime',
+                maxZoom: 14 * 24 * 3600000, // fourteen days
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Este eje se ajusta a los datos a graficar'
+                }
+            },
+            tooltip: {
+                shared: true
+            },
+            legend: {
+                enabled: false
+            },
+            plotOptions: {
+                area: {
+                    fillColor: {
+                        linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1},
+                        stops: [
+                            [0, Highcharts.getOptions().colors[0]],
+                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                    },
+                    lineWidth: 1,
+                    marker: {
+                        enabled: false
+                    },
+                    shadow: false,
+                    states: {
+                        hover: {
+                            lineWidth: 1
+                        }
+                    },
+                    threshold: null
+                }
+            },
+    
+            series: [{
+                type: 'area',
+                name: 'Dato aleatorio',
+                pointInterval: 24 * 3600 * 1000, //Define el intervalo de puntos graficados
+                pointStart: Date.UTC(2012, 0, 01),
+                data: aleatorios
+            }]
+        });
+    });
+    
+
+		</script>
+	</head>
+
+	<body>
+		<div>
+			<header>
+				<h1>grafica_3</h1>
+			</header>
+			<nav>
+				<p>
+					<a href="index.html">Home</a>
+				</p>
+				<p>
+					<a href="/contact">Contact</a>
+				</p>
+				<p>
+				<div id="contenedor_graficos" style="min-width: 500px; height: 400px; margin: 0 auto"> </div>
+				</p>
+			</nav>
+
+			<div>
+
+			</div>
+
+			<footer>
+				<p>
+					&copy; Copyright  by Catarino
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>

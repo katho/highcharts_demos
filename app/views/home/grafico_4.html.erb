@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>grafico_4</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Catarino" />
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<%= javascript_include_tag "jquery.min", "highcharts", "exporting" %>
+		<script type="text/javascript">
+		var dato_1 = new Array(2);
+		var dato_2 = new Array(2);
+		var dato_3 = new Array(2);
+		var dato_4 = new Array(2);
+		var dato_5 = new Array(2);
+		var dato_6 = new Array(2);
+		var dato_7 = new Array(2);
+		var i = 0;
+		
+$(function () {
+		dato_1[0] = 10;
+		dato_2[0] = 20;
+		dato_3[0] = 35;
+		dato_4[0] = 40;
+		dato_5[0] = 60;
+		dato_6[0] = 75;
+		dato_7[0] = 80.9;
+		dato_1[1] = 25
+		dato_2[1] = 15;
+		dato_3[1] = 5;
+		dato_4[1] = -5;
+		dato_5[1] = -10;
+		dato_6[1] = -15;
+		dato_7[1] = -20;
+        $('#contenedor_graficos').highcharts({
+            chart: {
+                type: 'spline',
+                inverted: true,
+                width: 500,
+                style: {
+                    margin: '0 auto'
+                }
+            },
+            title: {
+                text: 'Temperatura de la atmósfera por altitud'
+            },
+            subtitle: {
+                text: 'Resultados medidos por la sonda AEIS-100x'
+            },
+            xAxis: {
+                reversed: false,
+                title: {
+                    enabled: true,
+                    text: 'Altitud'
+                },
+                labels: {
+                    formatter: function() {
+                        return this.value +'km';
+                    }
+                },
+                maxPadding: 0.05,
+                showLastLabel: true
+            },
+            yAxis: {
+                title: {
+                    text: 'Temperatura'
+                },
+                labels: {
+                    formatter: function() {
+                        return this.value + '°';
+                    }
+                },
+                lineWidth: 2
+            },
+            legend: {
+                enabled: false
+            },
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br/>',
+                pointFormat: '{point.x} km: {point.y}°C'
+            },
+            plotOptions: {
+                spline: {
+                    marker: {
+                        enable: false
+                    }
+                }
+            },
+            series: [{
+                name: 'Temperatura',
+                data: [dato_1,  dato_2, dato_3, dato_4,  dato_5, dato_6, dato_7]
+            }]
+        });
+    });
+    
+
+		</script>
+	</head>
+
+	<body>
+		<div>
+			<header>
+				<h1>grafico_4</h1>
+			</header>
+			<nav>
+				<p>
+					<a href="index.html">Home</a>
+				</p>
+				<p>
+					<a href="/contact">Contact</a>
+				</p>
+				<p>
+				<div id="contenedor_graficos" style="min-width: 500px; height: 400px; margin: 0 auto"> </div>
+				</p>
+			</nav>
+
+			<div>
+
+			</div>
+
+			<footer>
+				<p>
+					&copy; Copyright  by Catarino
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>
